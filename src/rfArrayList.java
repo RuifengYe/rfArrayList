@@ -1,9 +1,28 @@
+import java.util.Iterator;
+
 public class rfArrayList<AnyType> {
     AnyType[] coreArray;
     int current;
+    int modNum;
+    class rfArrayListIterator implements Iterator<AnyType>{
+        int modNumCopy;
+        int index;
+        public rfArrayListIterator(){
+            modNumCopy=modNum;
+        }
+        public boolean hasNext(){
+            return index<current;
+        }
+
+        @Override
+        public AnyType next() {
+            return coreArray[index++];
+        }
+    }
     public rfArrayList(){
         coreArray=(AnyType[]) new Object[8];
     }
+
     public rfArrayList(int size){
         coreArray=(AnyType[])new Object[size];
     }
@@ -16,6 +35,7 @@ public class rfArrayList<AnyType> {
             coreArray=tmp;
         }
         coreArray[current++]=o;
+        modNum++;
     }
     public AnyType get(int index){
         return coreArray[index];
@@ -28,6 +48,11 @@ public class rfArrayList<AnyType> {
         for(int i=index+1;i<current;i++)
             coreArray[i-1]=coreArray[i];
         current--;
+        modNum--;
         return removed;
+    }
+
+    public Iterator<AnyType> iterator(){
+        return new rfArrayListIterator();
     }
 }

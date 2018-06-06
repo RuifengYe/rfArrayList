@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class test {
     public static void main(String[] args){
         rfArrayList<Integer> testrf=new rfArrayList<>(10);
@@ -9,8 +11,12 @@ public class test {
         }
         System.out.println("\n");
         testrf.remove(0);
-        for(int i=0;i<testrf.size();i++){
-            System.out.print(testrf.get(i)+" ");
+//        for(int i=0;i<testrf.size();i++){
+//            System.out.print(testrf.get(i)+" ");
+//        }
+        Iterator<Integer> itr=testrf.iterator();
+        while(itr.hasNext()){
+            System.out.print(itr.next()+" ");
         }
     }
 }
